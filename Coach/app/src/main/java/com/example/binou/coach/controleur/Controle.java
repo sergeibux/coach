@@ -14,6 +14,10 @@ public final class Controle {
         super();
     }
 
+    /**
+     * Ne permettre qu'une instance
+     * @return l'instance de controle pour l'affichage
+     */
     public final static Controle getInstance(){
         if (instance==null) {
             Controle.instance = new Controle();

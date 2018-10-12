@@ -16,7 +16,9 @@ import com.example.binou.coach.R;
 import com.example.binou.coach.controleur.Controle;
 import com.example.binou.coach.modele.Profil;
 
+
 public class MainActivity extends AppCompatActivity {
+
 
     private EditText txtPoids, txtTaille, txtAge;
     private RadioButton rdHomme;
@@ -31,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
 
+    /**
+     * initialisation de l'instance unique 'controle'
+     *
+     */
     private void init(){
         txtPoids = (EditText) findViewById(R.id.txtPoids);
         txtTaille = (EditText) findViewById(R.id.txtTaille);
@@ -41,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
         ecouteCalcul();
     }
 
+    /**
+     * Lecture des champs,
+     * test si les champs ne sont pas remplis,
+     * volorisation du sexe,
+     *
+     */
     private void ecouteCalcul(){
         ((Button) findViewById(R.id.btnCalc)).setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v){
@@ -66,6 +78,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Affichage des résultats
+     * @param poids
+     * @param taille
+     * @param age
+     * @param sexe
+     */
     private void afficheResult(Integer poids, Integer taille, Integer age, int sexe){
 
         controle.creerProfil(poids, taille, age, sexe);
