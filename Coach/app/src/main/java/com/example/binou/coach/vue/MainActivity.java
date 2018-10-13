@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private EditText txtPoids, txtTaille, txtAge;
-    private RadioButton rdHomme;
+    private RadioButton rdHomme, rdFemme;
     private TextView lblIMG;
     private ImageView imgSmiley;
     private Controle controle;
@@ -41,10 +41,32 @@ public class MainActivity extends AppCompatActivity {
         txtPoids = (EditText) findViewById(R.id.txtPoids);
         txtTaille = (EditText) findViewById(R.id.txtTaille);
         txtAge = (EditText) findViewById(R.id.txtAge);
-
-        controle = Controle.getInstance();
+        rdHomme = (RadioButton) findViewById(R.id.rdHomme);
+        rdFemme = (RadioButton) findViewById(R.id.rdFemme);
+        controle = Controle.getInstance(this);
 
         ecouteCalcul();
+
+        recupProfil();
+    }
+
+    /**
+     * Permet de faire remonter les infos (désérialiser)
+     */
+    public void recupProfil(){
+        if (controle.getTaille()!=null) {
+            txtTaille.setText(controle.getTaille().toString());
+            txtPoids.setText(controle.getPoids().toString());
+            txtAge.setText(controle.getAge().toString());
+            if (controle.getSexe() != null) {
+                if (controle.getSexe() == 1) {
+                    rdHomme.setChecked(true);
+                } else if (controle.getSexe() == 0) {
+                    rdFemme.setChecked(true);
+                }
+            }
+            ((Button) findViewById(R.id.btnCalc)).performClick();
+        }
     }
 
     /**
@@ -87,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void afficheResult(Integer poids, Integer taille, Integer age, int sexe){
 
-        controle.creerProfil(poids, taille, age, sexe);
+        controle.creerProfil(poids, taille, age, sexe, this);
 
         String msg;
         float img;

@@ -1,12 +1,14 @@
 package com.example.binou.coach.modele;
 
+import java.io.Serializable;
+
 /**
  *
  * Created by Binou
  * Date 12-10-2018
  *
  */
-public class Profil {
+public class Profil implements Serializable {
 
     //  Constantes
     private static final int minFemme = 15; // Maigre si en dessous
@@ -26,7 +28,7 @@ public class Profil {
      * @param iAge
      * @param iSexe
      */
-    public Profil(int iPoids, int iTaille, int iAge, int iSexe) {
+    public Profil (int iPoids, int iTaille, int iAge, int iSexe) {
         this.iPoids = iPoids;
         this.iTaille = iTaille;
         this.iAge = iAge;
