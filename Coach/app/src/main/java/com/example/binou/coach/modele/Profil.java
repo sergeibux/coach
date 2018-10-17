@@ -29,6 +29,7 @@ public class Profil implements Serializable {
      * @param iTaille
      * @param iAge
      * @param iSexe
+     * @param date
      */
     public Profil (Date date, int iPoids, int iTaille, int iAge, int iSexe) {
         this.dateMesure = date;

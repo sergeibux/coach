@@ -16,6 +16,8 @@ import com.example.binou.coach.R;
 import com.example.binou.coach.controleur.Controle;
 import com.example.binou.coach.modele.Profil;
 
+import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity {
 

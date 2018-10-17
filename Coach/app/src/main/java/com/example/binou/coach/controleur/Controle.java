@@ -6,6 +6,8 @@ import android.util.Log;
 import com.example.binou.coach.modele.AccesLocal;
 import com.example.binou.coach.modele.Profil;
 
+import java.util.Date;
+
 import static com.example.emds.coach.outils.Serializer.deSerialize;
 
 public final class Controle {
@@ -39,10 +41,11 @@ public final class Controle {
      * @param iTaille
      * @param iAge
      * @param iSexe
+     * @param context
      */
     public void creerProfil (Integer iPoids, Integer iTaille, Integer iAge, Integer iSexe, Context context){
 
-        profil = new Profil(iPoids, iTaille, iAge, iSexe);
+        profil = new Profil(new Date(), iPoids, iTaille, iAge, iSexe);
         accesLocal.Ajout(profil);
 //        com.example.emds.coach.outils.Serializer.serialize(nomFic, profil, context);
     }
