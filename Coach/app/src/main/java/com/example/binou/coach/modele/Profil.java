@@ -1,6 +1,7 @@
 package com.example.binou.coach.modele;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Profil implements Serializable {
     private int iPoids, iTaille, iAge, iSexe;
     private float fImg;
     private String strMsg;
+    private Date dateMesure;
 
     /**
      * Constructeur de Profil
@@ -28,7 +30,8 @@ public class Profil implements Serializable {
      * @param iAge
      * @param iSexe
      */
-    public Profil (int iPoids, int iTaille, int iAge, int iSexe) {
+    public Profil (Date date, int iPoids, int iTaille, int iAge, int iSexe) {
+        this.dateMesure = date;
         this.iPoids = iPoids;
         this.iTaille = iTaille;
         this.iAge = iAge;
@@ -85,6 +88,14 @@ public class Profil implements Serializable {
      */
     public String getStrMsg() {
         return strMsg;
+    }
+
+    /**
+     *
+     * @return date calculée pour Sqlite DB
+     */
+    public Date getDateMesure() {
+        return dateMesure;
     }
 
     //  Méthodes

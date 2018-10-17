@@ -3,6 +3,7 @@ package com.example.binou.coach.controleur;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.binou.coach.modele.AccesLocal;
 import com.example.binou.coach.modele.Profil;
 
 import static com.example.emds.coach.outils.Serializer.deSerialize;
@@ -12,6 +13,7 @@ public final class Controle {
     private static Controle instance = null;
     private static Profil profil;
     private static String nomFic = "saveprofile";
+    public static AccesLocal accesLocal;
 
     // constructeur
     private Controle() {
@@ -25,6 +27,7 @@ public final class Controle {
     public final static Controle getInstance(Context context){
         if (instance==null) {
             Controle.instance = new Controle();
+            accesLocal = new AccesLocal(context);
             recupSerialize(context);
         }
         return Controle.instance;
@@ -40,14 +43,15 @@ public final class Controle {
     public void creerProfil (Integer iPoids, Integer iTaille, Integer iAge, Integer iSexe, Context context){
 
         profil = new Profil(iPoids, iTaille, iAge, iSexe);
-
-        com.example.emds.coach.outils.Serializer.serialize(nomFic, profil, context);
+        accesLocal.Ajout(profil);
+//        com.example.emds.coach.outils.Serializer.serialize(nomFic, profil, context);
     }
 
     public static void recupSerialize(Context context){
         profil = (Profil)deSerialize(nomFic, context);
 
     }
+
 
     /**
      *
