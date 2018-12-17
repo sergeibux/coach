@@ -1,5 +1,6 @@
 package com.example.binou.coach.vue;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,9 +15,12 @@ import android.widget.Toast;
 
 import com.example.binou.coach.R;
 import com.example.binou.coach.controleur.Controle;
-import com.example.binou.coach.modele.Profil;
+
 
 import java.util.Date;
+
+import static com.example.binou.coach.outils.MesOutils.Keyboard;
+import static java.lang.Boolean.TRUE;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+
     }
 
     /**
@@ -46,10 +51,11 @@ public class MainActivity extends AppCompatActivity {
         rdHomme = (RadioButton) findViewById(R.id.rdHomme);
         rdFemme = (RadioButton) findViewById(R.id.rdFemme);
         controle = Controle.getInstance(this);
+        Keyboard("show", MainActivity.this);
 
         ecouteCalcul();
 
-        recupProfil();
+//        recupProfil();
     }
 
     /**
@@ -74,13 +80,14 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Lecture des champs,
      * test si les champs ne sont pas remplis,
-     * volorisation du sexe,
+     * valorisation du sexe,
      *
      */
     private void ecouteCalcul(){
         ((Button) findViewById(R.id.btnCalc)).setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v){
                 int poids=0, taille=0, age=0;
+
                 try {
                     poids = Integer.parseInt(txtPoids.getText().toString());
                     taille = Integer.parseInt(txtTaille.getText().toString());
@@ -97,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Veuillez saisir tous les champs.\nMerci.", Toast.LENGTH_SHORT).show();
                 } else {
                     afficheResult(poids, taille, age, sexe);
+                    Keyboard("hide", MainActivity.this);
                 }
             }
         });

@@ -31,7 +31,7 @@ public class AccesLocal {
         this.accesBd = new MySQLiteOpenHelper(context, nomBase, versionBase);
     }
 
-    public void Ajout(Profil profil){
+    public void Ajouter(Profil profil){
         this.bd = accesBd.getWritableDatabase();
         req = "insert into profil (dateMesure, poids, taille, age, sexe) values ";
         req += "(\""+profil.getDateMesure()+"\","+profil.getiPoids()+","+profil.getiTaille()+","+profil.getiAge()+","+profil.getiSexe()+")";

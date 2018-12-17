@@ -1,21 +1,26 @@
 package com.example.binou.coach.controleur;
 
 import android.content.Context;
-import android.util.Log;
 
+import com.example.binou.coach.modele.AccesDistant;
 import com.example.binou.coach.modele.AccesLocal;
 import com.example.binou.coach.modele.Profil;
+import com.example.binou.coach.vue.MainActivity;
+
+import org.json.JSONArray;
 
 import java.util.Date;
 
-import static com.example.emds.coach.outils.Serializer.deSerialize;
+import static com.example.binou.coach.outils.Serializer.deSerialize;
 
 public final class Controle {
     // instance unique de la classe
     private static Controle instance = null;
     private static Profil profil;
     private static String nomFic = "saveprofile";
-    public static AccesLocal accesLocal;
+//    public static AccesLocal accesLocal;
+    public static AccesDistant accesDistant;
+    public static Context context;
 
     // constructeur
     private Controle() {
@@ -27,10 +32,16 @@ public final class Controle {
      * @return l'instance de controle pour l'affichage
      */
     public final static Controle getInstance(Context context){
+        if (context != null) {
+            Controle.context = context;
+        }
+
         if (instance==null) {
             Controle.instance = new Controle();
-            accesLocal = new AccesLocal(context);
-            recupSerialize(context);
+//            accesLocal = new AccesLocal(context);
+            accesDistant = new AccesDistant();
+            accesDistant.envoi("dernier", new JSONArray());
+//            recupSerialize(context);
         }
         return Controle.instance;
     }
@@ -46,8 +57,8 @@ public final class Controle {
     public void creerProfil (Integer iPoids, Integer iTaille, Integer iAge, Integer iSexe, Context context){
 
         profil = new Profil(new Date(), iPoids, iTaille, iAge, iSexe);
-        accesLocal.Ajout(profil);
-//        com.example.emds.coach.outils.Serializer.serialize(nomFic, profil, context);
+//        accesLocal.Ajouter(profil);
+        accesDistant.envoi("enreg", profil.convertToJSONARRAY());
     }
 
     public static void recupSerialize(Context context){
@@ -119,5 +130,10 @@ public final class Controle {
         } else {
             return profil.getiSexe();
         }
+    }
+
+    public static void setProfil(Profil profil) {
+        Controle.profil = profil;
+        ((MainActivity)context).recupProfil();
     }
 }

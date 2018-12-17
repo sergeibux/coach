@@ -1,7 +1,15 @@
 package com.example.binou.coach.modele;
 
+import android.util.Log;
+
+import com.example.binou.coach.outils.MesOutils;
+
+import org.json.JSONArray;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -133,5 +141,16 @@ public class Profil implements Serializable {
                 strMsg = "normal";
             }
         }
+    }
+
+
+    public JSONArray convertToJSONARRAY(){
+        List liste = new ArrayList();
+        liste.add(MesOutils.convertDateToString(dateMesure));
+        liste.add(iPoids);
+        liste.add(iTaille);
+        liste.add(iAge);
+        liste.add(iSexe);
+        return new JSONArray(liste);
     }
 }

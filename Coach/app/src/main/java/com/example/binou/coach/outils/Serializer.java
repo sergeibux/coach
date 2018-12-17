@@ -1,4 +1,4 @@
-package com.example.emds.coach.outils;
+package com.example.binou.coach.outils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
