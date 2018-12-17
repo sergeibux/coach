@@ -1,10 +1,9 @@
 package com.example.binou.coach.outils;
 
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import com.example.binou.coach.vue.MainActivity;
+import com.example.binou.coach.vue.CalculActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,7 +58,7 @@ public abstract class MesOutils {
      * @param oh
      * @param activity
      */
-    public static void Keyboard(String oh, MainActivity activity){
+    public static void Keyboard(String oh, CalculActivity activity){
 
             InputMethodManager inputMethodManager;
             inputMethodManager = (InputMethodManager) activity.getSystemService(activity.INPUT_METHOD_SERVICE);

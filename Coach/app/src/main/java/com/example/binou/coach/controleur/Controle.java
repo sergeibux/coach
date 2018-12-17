@@ -3,9 +3,8 @@ package com.example.binou.coach.controleur;
 import android.content.Context;
 
 import com.example.binou.coach.modele.AccesDistant;
-import com.example.binou.coach.modele.AccesLocal;
 import com.example.binou.coach.modele.Profil;
-import com.example.binou.coach.vue.MainActivity;
+import com.example.binou.coach.vue.CalculActivity;
 
 import org.json.JSONArray;
 
@@ -134,6 +133,6 @@ public final class Controle {
 
     public static void setProfil(Profil profil) {
         Controle.profil = profil;
-        ((MainActivity)context).recupProfil();
+        ((CalculActivity)context).recupProfil();
     }
 }
