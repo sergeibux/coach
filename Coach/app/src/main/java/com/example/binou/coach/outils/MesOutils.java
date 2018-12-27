@@ -54,7 +54,7 @@ public abstract class MesOutils {
 
     /**
      * Show/hide keyboard
-     * @TODO fixing bug on launching app there's no keyboard.
+     * @TODO fix bug on launching app there's no keyboard.
      * @param oh
      * @param activity
      */
@@ -74,5 +74,9 @@ public abstract class MesOutils {
             } else {
                 inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
             }
+    }
+
+    public static String formatToDecimal(Float f){
+        return String.format("%.01f", f);
     }
 }

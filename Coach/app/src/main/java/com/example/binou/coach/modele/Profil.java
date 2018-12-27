@@ -17,7 +17,7 @@ import java.util.List;
  * Date 12-10-2018
  *
  */
-public class Profil implements Serializable {
+public class Profil implements Serializable, Comparable {
 
     //  Constantes
     private static final int minFemme = 15; // Maigre si en dessous
@@ -121,7 +121,7 @@ public class Profil implements Serializable {
 
     /**
      * resultIMG()
-     * Afiche le message
+     * Affiche le message
      */
     private void resultIMG(){
         if (iSexe==1){     // c'est un homme
@@ -152,5 +152,10 @@ public class Profil implements Serializable {
         liste.add(iAge);
         liste.add(iSexe);
         return new JSONArray(liste);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return dateMesure.compareTo(((Profil)o).getDateMesure());
     }
 }

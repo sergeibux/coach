@@ -1,6 +1,7 @@
 package com.example.binou.coach.controleur;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.binou.coach.modele.AccesDistant;
 import com.example.binou.coach.modele.Profil;
@@ -8,6 +9,7 @@ import com.example.binou.coach.vue.CalculActivity;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import static com.example.binou.coach.outils.Serializer.deSerialize;
@@ -19,13 +21,32 @@ public final class Controle {
     private static String nomFic = "saveprofile";
 //    public static AccesLocal accesLocal;
     public static AccesDistant accesDistant;
-    public static Context context;
+    private static Context context;
+    private static ArrayList<Profil> lesProfils = new ArrayList<Profil>();
+
 
     // constructeur
     private Controle() {
         super();
     }
 
+
+    public ArrayList<Profil> getLesProfils() {
+        return lesProfils;
+    }
+
+    public void setLesProfils(ArrayList<Profil> lesProfils) {
+        this.lesProfils = lesProfils;
+    }
+
+    /**
+     * demande de suppression d'un profil
+     * @param profil
+     */
+    public void delProfil(Profil profil){
+        accesDistant.envoi("del", profil.convertToJSONARRAY());
+        lesProfils.remove(profil);
+    }
     /**
      * Ne permettre qu'une instance
      * @return l'instance de controle pour l'affichage
@@ -39,7 +60,7 @@ public final class Controle {
             Controle.instance = new Controle();
 //            accesLocal = new AccesLocal(context);
             accesDistant = new AccesDistant();
-            accesDistant.envoi("dernier", new JSONArray());
+            accesDistant.envoi("tous", new JSONArray());
 //            recupSerialize(context);
         }
         return Controle.instance;
@@ -55,23 +76,28 @@ public final class Controle {
      */
     public void creerProfil (Integer iPoids, Integer iTaille, Integer iAge, Integer iSexe, Context context){
 
-        profil = new Profil(new Date(), iPoids, iTaille, iAge, iSexe);
+        Profil unProfil = new Profil(new Date(), iPoids, iTaille, iAge, iSexe);
+        lesProfils.add(unProfil);
 //        accesLocal.Ajouter(profil);
-        accesDistant.envoi("enreg", profil.convertToJSONARRAY());
+        accesDistant.envoi("enreg", unProfil.convertToJSONARRAY());
     }
 
-    public static void recupSerialize(Context context){
+/*    public static void recupSerialize(Context context){
         profil = (Profil)deSerialize(nomFic, context);
 
-    }
+    }*/
 
 
     /**
      *
      * @return IMG
      */
-    public float getImg(){
-        return profil.getfImg();
+    public Float getImg(){
+        if (lesProfils.size()==0){
+            return null;
+        }else {
+            return lesProfils.get(lesProfils.size() - 1).getfImg();
+        }
     }
 
     /**
@@ -79,8 +105,11 @@ public final class Controle {
      * @return message
      */
     public String getMsg(){
-        return profil.getStrMsg();
-
+        if (lesProfils.size()==0){
+            return null;
+        }else {
+            return lesProfils.get(lesProfils.size()-1).getStrMsg();
+        }
     }
 
     /**
@@ -133,6 +162,6 @@ public final class Controle {
 
     public static void setProfil(Profil profil) {
         Controle.profil = profil;
-        ((CalculActivity)context).recupProfil();
+//        ((CalculActivity)context).recupProfil();
     }
 }
