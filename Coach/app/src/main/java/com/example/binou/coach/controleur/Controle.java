@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.binou.coach.modele.AccesDistant;
 import com.example.binou.coach.modele.Profil;
+import com.example.binou.coach.outils.Serializer;
 import com.example.binou.coach.vue.CalculActivity;
 
 import org.json.JSONArray;
@@ -22,7 +23,7 @@ public final class Controle {
 //    public static AccesLocal accesLocal;
     public static AccesDistant accesDistant;
     private static Context context;
-    private static ArrayList<Profil> lesProfils = new ArrayList<Profil>();
+    private ArrayList<Profil> lesProfils = new ArrayList<Profil>();
 
 
     // constructeur
@@ -82,10 +83,10 @@ public final class Controle {
         accesDistant.envoi("enreg", unProfil.convertToJSONARRAY());
     }
 
-/*    public static void recupSerialize(Context context){
-        profil = (Profil)deSerialize(nomFic, context);
+    public static void recupSerialize(Context context){
+        profil = (Profil)Serializer.deSerialize(nomFic, context);
 
-    }*/
+    }
 
 
     /**
