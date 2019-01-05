@@ -16,27 +16,22 @@ import java.util.Date;
 
 public class AccesDistant implements AsyncResponse {
     private static final String SERVERADDR = "http://192.168.1.22/Coach/serveurCoach.php";
-//    private static final String SERVERADDR = "http://localhost/Coach/serveurCoach.php";
     private Controle controle;
 
     public AccesDistant(){
-        controle.getInstance(null);
+        controle = Controle.getInstance(null);
     }
 
     @Override
     public void processFinish(String output) {
+
         String[] message = output.split("%");
-//        Log.d("Serveur : ", "**************"+output);
 
         if(message.length > 1){
-            if(message[0].equals("enreg")){
-                Log.d("enreg : ", message[1]);
-            }else{
 
-                if (message[0].equals("tous")){
-                    Log.d("tous : ", message[1]);
+                if (message[0].equals(" tous")){
+                    ArrayList<Profil> lesProfils = new ArrayList<>();
                     try {
-                        ArrayList<Profil> lesProfils = new ArrayList<Profil>();
                         JSONArray infos = new JSONArray(message[1]);
                         for (int i=0; i<infos.length(); i++) {
                             JSONObject info = new JSONObject(infos.get(i).toString());
@@ -49,15 +44,16 @@ public class AccesDistant implements AsyncResponse {
                             lesProfils.add(profil);
                         }
                         controle.setLesProfils(lesProfils);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 } else {
-                    Log.e("Erreur : ", message[1]);
+                    Log.e("Erreur : message[0]", message[0]);
                 }
-            }
+
         }else{
-            Log.d("Nothing...", "Nothing to do ::: "+message[0]);
+            Log.d("Nothing...", "Nothing to do ::: >"+message[0]+"<");
         }
     }
 
@@ -66,7 +62,6 @@ public class AccesDistant implements AsyncResponse {
         accesDonnees.delegate = this;
         accesDonnees.addParam("operation", operation);
         accesDonnees.addParam("lesDonnees", lesdonneesJSON.toString());
-        Log.d ("????", "operation : >"+operation+"<\n lesDonnees : >"+lesdonneesJSON.toString()+"< \n serveraddr : "+SERVERADDR);
         accesDonnees.execute(SERVERADDR);
     }
 }

@@ -33,10 +33,11 @@ public final class Controle {
 
 
     public ArrayList<Profil> getLesProfils() {
-        return lesProfils;
+        return getInstance(context).lesProfils;
     }
 
     public void setLesProfils(ArrayList<Profil> lesProfils) {
+
         this.lesProfils = lesProfils;
     }
 
@@ -61,6 +62,7 @@ public final class Controle {
             Controle.instance = new Controle();
 //            accesLocal = new AccesLocal(context);
             accesDistant = new AccesDistant();
+            Log.d("Controle", "getInstance.");
             accesDistant.envoi("tous", new JSONArray());
 //            recupSerialize(context);
         }

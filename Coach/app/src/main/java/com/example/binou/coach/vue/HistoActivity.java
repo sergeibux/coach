@@ -45,7 +45,6 @@ public class HistoActivity extends AppCompatActivity {
         Collections.sort(liste, Collections.<Profil>reverseOrder());
         Log.d("null?", "maybe");
         if (liste != null){
-            Log.d("null?", "noop");
             ListView listView = (ListView)findViewById(R.id.lstHisto);
             HistoListAdapter adapter = new HistoListAdapter(HistoActivity.this, liste);
             listView.setAdapter(adapter);

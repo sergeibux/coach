@@ -46,7 +46,7 @@ public abstract class MesOutils {
      * @return
      */
     public static String convertDateToString (Date uneDate){
-        SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return date.format(uneDate);
 
     }
